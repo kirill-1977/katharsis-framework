@@ -40,6 +40,7 @@ import io.katharsis.resource.Document;
 import io.katharsis.resource.Resource;
 import io.katharsis.resource.annotations.JsonApiLinksInformation;
 import io.katharsis.resource.annotations.JsonApiMetaInformation;
+import io.katharsis.resource.annotations.JsonApiResource;
 import io.katharsis.resource.annotations.LookupIncludeBehavior;
 import io.katharsis.resource.information.ResourceField;
 import io.katharsis.resource.information.ResourceFieldType;
@@ -239,7 +240,7 @@ public class JpaResourceInformationBuilder implements ResourceInformationBuilder
 
 	@Override
 	public String getResourceType(Class<?> entityClass) {
-		JpaResource annotation = entityClass.getAnnotation(JpaResource.class);
+		JsonApiResource annotation = entityClass.getAnnotation(JsonApiResource.class);
 		if (annotation != null) {
 			return annotation.type();
 		}
