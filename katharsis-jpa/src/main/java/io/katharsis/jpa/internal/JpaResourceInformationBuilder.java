@@ -289,7 +289,7 @@ public class JpaResourceInformationBuilder implements ResourceInformationBuilder
 	}
 
 	protected boolean isIgnored(MetaAttribute attr) {
-		return false;
+		return attr.isIgnored();
 	}
 
 	protected ResourceField toField(MetaDataObject meta, MetaAttribute attr) {

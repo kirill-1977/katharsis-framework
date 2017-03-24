@@ -48,6 +48,8 @@ public class MetaAttribute extends MetaElement {
 
 	private boolean filterable;
 
+	private boolean ignored;
+
 	@JsonApiRelation(serialize=SerializeType.LAZY)
 	private MetaAttribute oppositeAttribute;
 
@@ -59,6 +61,8 @@ public class MetaAttribute extends MetaElement {
 
 			this.field = ClassUtils.findClassField(beanClass, name);
 			this.readMethod = ClassUtils.findGetter(beanClass, name);
+
+			this.ignored = field.isAnnotationPresent(JsonIgnore.class);
 
 			PreconditionUtil.assertFalse("no getter or field found ", field == null && readMethod == null);
 
@@ -208,5 +212,13 @@ public class MetaAttribute extends MetaElement {
 
 	public void setFilterable(boolean filterable) {
 		this.filterable = filterable;
+	}
+
+	public boolean isIgnored() {
+		return ignored;
+	}
+
+	public void setIgnored(boolean ignored) {
+		this.ignored = ignored;
 	}
 }
