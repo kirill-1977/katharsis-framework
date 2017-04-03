@@ -62,7 +62,7 @@ public class MetaAttribute extends MetaElement {
 			this.field = ClassUtils.findClassField(beanClass, name);
 			this.readMethod = ClassUtils.findGetter(beanClass, name);
 
-			this.ignored = field.isAnnotationPresent(JsonIgnore.class);
+			this.ignored = field != null && field.isAnnotationPresent(JsonIgnore.class);
 
 			PreconditionUtil.assertFalse("no getter or field found ", field == null && readMethod == null);
 
