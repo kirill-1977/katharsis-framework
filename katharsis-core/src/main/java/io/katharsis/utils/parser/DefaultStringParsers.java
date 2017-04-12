@@ -76,6 +76,12 @@ public final class DefaultStringParsers {
 				return input.charAt(0);
 			}
 		});
+		addType(parsers, singletonList(List.class), new StringParser<List>() {
+			@Override
+			public List parse(String input) {
+				return Collections.singletonList(input);
+			}
+		});
 		addType(parsers, asList(Boolean.class, boolean.class), new StringParser<Boolean>() {
 			@Override
 			public Boolean parse(String input) {
