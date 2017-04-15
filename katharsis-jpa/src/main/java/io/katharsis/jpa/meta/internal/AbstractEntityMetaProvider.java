@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.katharsis.core.internal.utils.ClassUtils;
 import io.katharsis.jpa.meta.MetaEntityAttribute;
 import io.katharsis.jpa.meta.MetaJpaDataObject;
@@ -96,6 +97,7 @@ public abstract class AbstractEntityMetaProvider<T extends MetaJpaDataObject> ex
 			OneToOne oneOneAnnotation = attr.getAnnotation(OneToOne.class);
 			Version versionAnnotation = attr.getAnnotation(Version.class);
 			ElementCollection elemCollectionAnnotation = attr.getAnnotation(ElementCollection.class);
+			JsonProperty jsonPropertyAnnotation = attr.getAnnotation(JsonProperty.class);
 
 			attr.setVersion(versionAnnotation != null);
 
@@ -108,6 +110,9 @@ public abstract class AbstractEntityMetaProvider<T extends MetaJpaDataObject> ex
 			}
 			if (oneOneAnnotation != null) {
 				fetchType = oneOneAnnotation.fetch();
+			}
+			if (jsonPropertyAnnotation != null) {
+				attr.setJsonName(jsonPropertyAnnotation.value());
 			}
 
 			attr.setAssociation(manyManyAnnotation != null || manyOneAnnotation != null || oneManyAnnotation != null

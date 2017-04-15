@@ -294,7 +294,7 @@ public class JpaResourceInformationBuilder implements ResourceInformationBuilder
 	}
 
 	protected ResourceField toField(MetaDataObject meta, MetaAttribute attr) {
-		String jsonName = attr.getName();
+		String jsonName = attr.getJsonName();
 		String underlyingName = attr.getName();
 		Class<?> type = attr.getType().getImplementationClass();
 		Type genericType = attr.getType().getImplementationType();

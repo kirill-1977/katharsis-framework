@@ -11,6 +11,7 @@ import io.katharsis.resource.annotations.JsonApiRelation;
 import io.katharsis.resource.annotations.JsonApiResource;
 import io.katharsis.resource.annotations.JsonApiToMany;
 import io.katharsis.resource.annotations.SerializeType;
+import org.apache.commons.lang3.StringUtils;
 
 @JsonApiResource(type = "meta/element")
 public class MetaElement {
@@ -19,6 +20,8 @@ public class MetaElement {
 	private String id;
 
 	private String name;
+
+	private String jsonName;
 
 	@JsonApiRelation(serialize=SerializeType.LAZY, opposite = "children")
 	private MetaElement parent;
@@ -88,6 +91,17 @@ public class MetaElement {
 
 	public void setName(String name) {
 		this.name = name;
+		if (StringUtils.isEmpty(jsonName)) {
+			jsonName = name;
+		}
+	}
+
+	public String getJsonName() {
+		return StringUtils.isEmpty(jsonName) ? name : jsonName;
+	}
+
+	public void setJsonName(String jsonName) {
+		this.jsonName = jsonName;
 	}
 
 	@JsonIgnore
